@@ -1,32 +1,32 @@
 import React from 'react'
+import {observer} from 'mobx-react';
+@observer
 class list extends React.Component
 {
 
+del=()=>{
 
-constructor(props){
-super(props);
-this.state={list:props.list}
-console.log('子组件的构造函数');
-console.log(this.state.list)
+this.props.list.pop();
+
+
 }
 
 render(){
 let lists;
-console.log('子组件的渲染内容内容');
-console.log(this.props.list.length)
-
-
 
     if(this.props.list.length>0)
    lists= this.props.list.map((item,index)=>
         <li key={index}>{item}</li>
     )
     return (
-    <ul>
+        <div>
+            <button onClick={this.del}>LIST组件删除</button>
+        <ul>
         {lists}
     </ul>
 
-
+        </div>
+    
 )
 
 

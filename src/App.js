@@ -1,21 +1,27 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import List from './component/list'
-// import 'react-mobx'
+import List from './component/list';
+import {observable} from 'mobx';
+import {observe} from 'mobx-react'
+import Show from './component/show';
 
-class App extends Component {
+class App extends Component { 
+ @observable list=[];
+
 constructor(){
   super()
-this.state={list:[]}
+  this.state={list:this.list}
+
 
 }
+
 //必须要绑定该方法的this才能指向在方法里面，使得this指向类 本身
 add=()=>{
-let newList=Object.assign([],this.state.list,this.state.list.push(this.state.list.length))
+// let newList=Object.assign([],this.list,this.list.push(this.list.length))
+this.list.push(this.list.length)
 
-this.setState({list:newList});
-
+ this.setState({list:this.list});
 }
 
   render() {
@@ -28,9 +34,10 @@ this.setState({list:newList});
         </header>
         <button onClick={this.add}>增加</button>
         <p className="App-intro">
-         {'长度：'+this.state.list.length+'   '+new Date().toLocaleTimeString()}
+         {'长度：'+this.list.length+'   '+new Date().toLocaleTimeString()}
         </p>
-        <List list={this.state.list}></List>
+        <Show list={this.list}></Show>
+        <List list={this.list}></List>
       </div>
       
     );
@@ -38,3 +45,4 @@ this.setState({list:newList});
 }
 
 export default App;
+
