@@ -24,6 +24,10 @@ this.list.push(this.list.length)
  this.setState({list:this.list});
 }
 
+show=(mes)=>{
+  console.log(mes)
+}
+
   render() {
 
     return (
@@ -32,11 +36,11 @@ this.list.push(this.list.length)
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <button onClick={this.add}>增加</button>
+        <button onClick={()=>{this.add()}} >增加</button>
         <p className="App-intro">
          {'长度：'+this.list.length+'   '+new Date().toLocaleTimeString()}
         </p>
-        <Show list={this.list}></Show>
+        <Show list={this.list} show={this.show}></Show>
         <List list={this.list}></List>
       </div>
       
