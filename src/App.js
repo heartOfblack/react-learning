@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import List from './component/list';
 import {observable} from 'mobx';
-import {observe} from 'mobx-react'
+import {observe,Provider} from 'mobx-react'
 import Show from './component/show';
 
 class App extends Component { 
@@ -31,6 +31,7 @@ show=(mes)=>{
   render() {
 
     return (
+      <Provider t={this}> 
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -40,10 +41,10 @@ show=(mes)=>{
         <p className="App-intro">
          {'长度：'+this.list.length+'   '+new Date().toLocaleTimeString()}
         </p>
-        <Show list={this.list} show={this.show}></Show>
+        <Show ></Show>
         <List list={this.list}></List>
       </div>
-      
+      </Provider>
     );
   }
 }

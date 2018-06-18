@@ -51,5 +51,32 @@ npm install --save mobx mobx-react
 ```
 
 
-- ### onclick绑定事件，如果带有括号的话在渲染的时候会直接被执行，所以如果有需要带参数的调用，写成匿名函数的调用方式，如下：。父组件
+- ### onclick绑定事件，如果带有括号的话在渲染的时候会直接被执行，所以如果有需要带参数的调用，写成匿名函数的调用方式，如下：。父组件的方法可以通过props传递给子组件
 `onClick={()=>{this.xxx()}}`
+
+- provider和inject 
+根据之前学习的观察状态@observable和@observe ，来共享状态，而在定义被观察者的时候，当前组件是没办法同时作为观察者的。所以，如果我们需要在父组件中使用当前被观察的对象，最好还是再把当前的“父组件”作为子组件抽离出来来， 单纯封装一个提供 共享状态和共享方法的父类。
+
+**那么共享状态可以通过@observe来观察，但如此一来，我们必须得通过props的方式显示地传入给子组件才能共享状态**
+>比如 `<List list={this.list}></List>` 必须显示地把共享状态list传入，List组件才能随着状态改变而更新数据
+
+包括共享的方法，我们也需要显示地传入。而@inject【依赖注入】和provider就是为了解决这个问题而存在的。
+
+provider通过把你提供的某个对象 共享/供应 出来，通过依赖注入的方式，提供给子组件，而不必要在子组件显式地传入props。如下：
+
+```javascript
+ <Provider t={this}>   //通过 provider标签  指定 一个或多个参数作为传入子组件props中的属性，此处为t(它可以是任意的对象) 而this则是当前的类对象(this中包含了@observale list=[]和 show方法)  ，这样即使我在Show中不传入list和show方法。只要在class Show之前通过@inject('t')的方式，我就能通过 this.props.t.list或者this.props.t.show调用注入的内容。此时，Show组件中的list同样是可以共享的,show方法还是调用的父组件的方法。如此一来，我们不需要为每个子组件传入属性而仅仅需要@inject(xxx)
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        <button onClick={()=>{this.add()}} >增加</button>
+        <p className="App-intro">
+         {'长度：'+this.list.length+'   '+new Date().toLocaleTimeString()}
+        </p>
+        <Show  ></Show>
+        <List list={this.list}></List>
+      </div>
+      </Provider>
+```

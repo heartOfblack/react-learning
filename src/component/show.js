@@ -1,5 +1,7 @@
 import React from 'react'
-import {observer} from 'mobx-react';
+import {observer,inject} from 'mobx-react';
+@inject('t')
+
 @observer
 class Show extends React.Component{
 
@@ -15,8 +17,8 @@ render(){
 
 return(
     <div>
-        {JSON.stringify(this.props.list)}
-        <button onClick={()=>{this.props.show(this.a)}}>调用show</button>
+        {JSON.stringify(this.props.t.list)}
+        <button onClick={()=>{this.props.t.show(this.a)}}>调用show</button>
     </div>
 )
 
