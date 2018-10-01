@@ -47,6 +47,8 @@ npm install --save mobx mobx-react
 
   **执行完后package.json会多出很多模块，具体npm run eject到底做了什么事，为什么要安装后续的几个babel模块还没有去了解，日后再深入了解**
 
+最后再执行一下 npm install命令，跑起来 npm start即可
+
   通过mobx和mobx-react，组件之间可以轻松通过@observe来更新视图内容！
 ```
 
