@@ -13,6 +13,8 @@ class TestModal {
         state2: 2
 
   }
+
+
   
     setnameReaction = reaction(() => this.name, name => {
 

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 
-import {observable, action, computed} from 'mobx';
+import {observable, action, trace,computed} from 'mobx';
 import {observer, Provider} from 'mobx-react'
 import Test from './model/test';
 import './App.css';
 import './index.css';
 
-function mylog(target) {
+/* function mylog(target) {
 
     const pro = Object.getOwnPropertyDescriptors(target.prototype);
     for (const key in pro) {
@@ -14,7 +14,7 @@ function mylog(target) {
         if (key === 'constructor') {
             continue;
         }
-
+    
         const func = pro[ key ].value;
         if (typeof func === 'function') {
             Object.defineProperty(target.prototype, key, {
@@ -35,38 +35,61 @@ function mylog(target) {
 
         }
     }
-}
+} */
 
 @observer
-@mylog
+class Input extends Component{
+    @observable inputVal=''
+    handleChange=(e)=>{
+
+        this.inputVal=e.target.value;
+console.log(this.inputVal)
+
+
+}
+    render(){trace()
+
+return <input type="text" name="" id="" onChange={this.handleChange} value={this.inputVal}/>
+
+    }
+
+
+
+}
+
+
+
+
+@observer
+// @mylog
 class App extends React.Component {
+   
     constructor() {
         super();
         this.test = new Test();
+        
+       
     }
-    // @action
+ /*    @action.bound
     setName (...args) {
-        // this.test.name = 'newName'
-        this.test.state.state1[0] = 666;
-        console.log('设置名称的动作');
+      
     }
     @computed get getname() {
 
         return this.test.name;
 
-    }
+    } */
 
-    render() {
+
+ 
+
+    render() {trace();
         return (
-            <div>
-                <div className="name">{this.getname}</div>
-                <div className="name">{this.test.state.state1}</div>
-                <div className="name">{this.test.state.state2}</div>
+           <div className="div">
+           
+            <Input/>
 
-                <button className="changename" onClick={()=>{this.setName(1,2,3,6,'x')}}>
-                    change name
-                </button>
-            </div>
+           </div>
         )
 
     }
