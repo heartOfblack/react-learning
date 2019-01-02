@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {observable, action, computed} from 'mobx';
+
+import {observable, action, trace,computed} from 'mobx';
 import {observer, Provider} from 'mobx-react'
 import Test from './model/test';
 import { Form} from 'antd';
@@ -33,25 +34,52 @@ import WrappedHorizontalLoginForm from './component/FormTest'
 } */
 
 @observer
+class Input extends Component{
+    @observable inputVal=''
+    handleChange=(e)=>{
+
+        this.inputVal=e.target.value;
+console.log(this.inputVal)
+
+
+}
+    render(){trace()
+
+return <input type="text" name="" id="" onChange={this.handleChange} value={this.inputVal}/>
+
+    }
+
+
+
+}
+
+
+
+
+@observer
 // @mylog
 class App extends React.Component {
+   
     constructor() {
         super();
         this.test = new Test();
+        
+       
     }
-    // @action
-    setName(...args) {
-        // this.test.name = 'newName'
-        this.test.state.state1[0] = 666;
-        console.log('设置名称的动作');
+ /*    @action.bound
+    setName (...args) {
+      
     }
     @computed get getname() {
 
         return this.test.name;
 
-    }
+    } */
 
-    render() {
+
+ 
+
+    render() {trace();
         return (
             <div>
                 <WrappedHorizontalLoginForm/>

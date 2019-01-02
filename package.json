@@ -56,8 +56,10 @@
     "babel-eslint": "^8.2.1",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "babel-preset-stage-2": "^6.24.1",
+    "merge": "^1.2.1",
     "mobx": "^5.0.2",
-    "react-mobx": "^0.0.3"
+    "react-mobx": "^0.0.3",
+    "url-parse": "^1.4.4"
   },
   "jest": {
     "collectCoverageFrom": [
