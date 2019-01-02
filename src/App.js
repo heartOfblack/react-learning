@@ -13,7 +13,8 @@ import WrappedHorizontalLoginForm from './component/FormTest'
         if (key === 'constructor') {
             continue;
         }
-        const func = pro[key].value;
+    
+        const func = pro[ key ].value;
         if (typeof func === 'function') {
             Object.defineProperty(target.prototype, key, {
                 value(...args) {
@@ -52,6 +53,9 @@ return <input type="text" name="" id="" onChange={this.handleChange} value={this
 
 
 }
+
+
+
 
 
 
