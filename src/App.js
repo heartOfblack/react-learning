@@ -36,16 +36,13 @@ import WrappedHorizontalLoginForm from './component/FormTest'
 
 @observer
 class Input extends Component{
-    @observable inputVal=''
+    @observable inputVal = '';
     handleChange=(e)=>{
-
-        this.inputVal=e.target.value;
-console.log(this.inputVal)
-
-
+    this.inputVal=e.target.value;
+        console.log(this.inputVal);
 }
-    render(){trace()
-
+    render(){
+console.log('表单刷新了')
 return <input type="text" name="" id="" onChange={this.handleChange} value={this.inputVal}/>
 
     }
@@ -63,11 +60,13 @@ return <input type="text" name="" id="" onChange={this.handleChange} value={this
 @observer
 // @mylog
 class App extends React.Component {
-   
-    constructor() {
+    @observable update = false;   
+    @observable test = false;   
+    
+    constructor () {
         super();
         this.test = new Test();
-        
+         
        
     }
  /*    @action.bound
@@ -80,13 +79,21 @@ class App extends React.Component {
 
     } */
 
+@action
+    refresh = () => {
+        this.update = !this.update;
+        setTimeout(() => {
+            this.test = !this.test;
+        }, 1e3);
+        
+ }
 
- 
-
-    render() {trace();
+    render() {
+        trace();
         return (
             <div>
-                <WrappedHorizontalLoginForm/>
+                <button onClick={ () => { this.refresh() } }>刷新{ this.update?'y':'n'}{ this.test?'yt':'nt'}</button>
+                <WrappedHorizontalLoginForm update={true} />
               {/*   <div className="name">{this.getname}</div>
                 <div className="name">{this.test.state.state1}</div>
                 <div className="name">{this.test.state.state2}</div>
