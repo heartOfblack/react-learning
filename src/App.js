@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {observable, action, trace,computed} from 'mobx';
+import {observable, action, trace,computed,reaction} from 'mobx';
 import {observer, Provider} from 'mobx-react'
 import Test from './model/test';
 import { Form} from 'antd';
@@ -82,12 +82,18 @@ class App extends React.Component {
 @action
     refresh = () => {
         this.update = !this.update;
-        setTimeout(() => {
-            this.test = !this.test;
-        }, 1e3);
+        this.test = !this.test;
+        console.log('action update的副作用');
+        console.log(this.update.toString());
         
  }
 
+    reaction1 = reaction(() => this.update, (update) => {
+        
+        console.error('对update产生了反应',update.toString());
+
+    })
+    
     render() {
         trace();
         return (
