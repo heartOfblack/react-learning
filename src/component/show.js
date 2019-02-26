@@ -1,24 +1,28 @@
 import React from 'react'
+import {Context} from './Context'
 import {observer,inject} from 'mobx-react';
-@inject('t')
-
+import List from './list'
 @observer
 class Show extends React.Component{
 
 
 constructor(){
 
-    super()
-    this.a=100;
+    super();
+
 }
 
 render(){
-
+ console.log(this.context);
 
 return(
+   
     <div>
-        {JSON.stringify(this.props.t.list)}
-        <button onClick={()=>{this.props.t.show(this.a)}}>调用show</button>
+        {
+            this.context.name+' '+
+            this.context.age
+        }
+        <List></List>
     </div>
 )
 
@@ -29,5 +33,5 @@ return(
 
     
 }
-
+Show.contextType=Context;
 export default Show; 

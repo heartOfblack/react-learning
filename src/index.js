@@ -15,28 +15,21 @@ import registerServiceWorker from './registerServiceWorker';
 class Toggle extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isToggleOn: true};
-
-    // 这个绑定是必要的，使`this`在回调中起作用
-    // this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick=()=> {
-    console.log(this,'====this====')
-    /* this.setState(state => ({
-      isToggleOn: !state.isToggleOn
-    })); */
   }
 
   render() {
     return (
       <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? 'ON' : 'OFF'}
+
+
       </button>
     );
   }
 }
 
-ReactDOM.render(<Toggle />, document.getElementById('root'));
-// ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<Toggle />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
