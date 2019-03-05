@@ -8,7 +8,8 @@ import './App.css';
 import './index.css';
 import WrappedHorizontalLoginForm from './component/FormTest'
 import {store,Context} from './component/Context';
-import Show from './component/show'
+import Show from './component/show';
+import ErrorBoundary from './component/ErrorBoundary'
 
 @observer
 class App extends React.Component {
@@ -28,7 +29,8 @@ class App extends React.Component {
     
         this.setState({
             name:Math.random()
-        }) 
+        }) ;
+        
         
  }
 
@@ -42,12 +44,14 @@ class App extends React.Component {
         trace();
         console.log(this.state)
         return (
+            <ErrorBoundary>
             <div>
                 <button onClick={ () => { this.refresh() } }>刷新</button>
                 <Context.Provider value={this.state}>
-            <Show></Show>
+                <Show></Show>
                 </Context.Provider>
             </div>
+        </ErrorBoundary>
         )
 
     }
